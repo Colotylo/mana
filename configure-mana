@@ -17,8 +17,8 @@ fi
 # This works on our local test computer (CentOS 7).
 # But also read the note right after this command.
 ./configure --enable-debug \
-             CFLAGS=-fno-stack-protector \
-             CXXFLAGS=-fno-stack-protector \
+             CFLAGS='-fno-stack-protector '\
+             CXXFLAGS='-fno-stack-protector -fpermissive' \
              MPI_BIN=$MPI_INSTALL_DIR/bin \
              MPI_INCLUDE=$MPI_INSTALL_DIR/include \
              MPI_LIB=$MPI_INSTALL_DIR/lib \

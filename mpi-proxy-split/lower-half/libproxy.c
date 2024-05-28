@@ -303,6 +303,15 @@ mydlsym(enum MPI_Fncs fnc)
   return MPI_Fnc_Ptrs[fnc];
 }
 
+int
+__libc_csu_init(int argc, char **argv, char **envp)
+{
+  return 0;
+}
+
+void
+__libc_csu_fini(void) {}
+
 __attribute__((constructor))
 void first_constructor()
 {

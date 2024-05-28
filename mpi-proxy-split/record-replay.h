@@ -182,12 +182,6 @@ namespace dmtcp_mpi
       return *(void**)_data;
     }
 
-    // Returns a void pointer to saved argument
-    operator void const*() const
-    {
-      return *(void const**)_data;
-    }
-
     operator MPI_User_function*() const
     {
       return *(MPI_User_function**)_data;
@@ -285,7 +279,7 @@ namespace dmtcp_mpi
       }
 
       // Returns a reference to the 'n'-th function argument object
-      const FncArg& args(int n) const
+      void* args(int n) const
       {
         return _args[n];
       }
