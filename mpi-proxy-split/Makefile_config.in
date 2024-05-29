@@ -28,17 +28,21 @@ default2: default
 #	${CXX} ${CXXFLAGS} `CC --cray-print-opts=cflags` -c -o $@ $<
 ## On Perlmutter, the generic settings of 'else' seem to work.
 else
-  MPICC = mpicc
-  MPICXX = mpic++ -std=c++14
-  MPIFORTRAN = mpifort
-  MPIRUN = mpirun
+  MPI_BIN = @MPI_BIN@
+  MPICC = @MPICC@
+  MPICXX = @MPICXX@ -std=c++14
+  MPIFORTRAN = @MPIFORTRAN@
+  MPIRUN = @MPIRUN@
+  
   # FIXME: The following paths are hardwired for non-NERSC platforms on which
   # MPICH and other extra libraries are installed from source.
   # Eventually, the LD_FLAGS for MPI should be configured in the
   # `../configure-mana` script.
-  MPI_LD_FLAG = -L$$HOME/mpich-static/usr/lib64 -lmpi -L$$HOME/local_install/lib -llzma -lz -lm -lxml2
+  MPI_LD_FLAG = -L$$HOME/mpich-static/usr/lib64 -lmpi -L$$HOME/local_install/lib -L/home/olek/local_install/lib -llzma -lz -lm -lxml2
   MPI_CFLAGS?= @CFLAGS@ -g3 -fPIC
   MPI_CXXFLAGS?= @CXXFLAGS@ -g3 -fPIC
   MPI_FFLAGS = @FFLAGS@ -g3
   MPI_LDFLAGS?=
 endif
+
+export MPI_BIN, MPI_INCLUDE, MPI_LIB, MPICC, MPICXX, MPIFORTRAN, MPIRUN
